@@ -4,14 +4,14 @@ import objects
 
 if __name__== '__main__':
   pygame.init()
-  screen = pygame.display.set_mode((512,256))
+  screen = pygame.display.set_mode((1024,512))
   pygame.display.set_caption('Witch')
   #pygame.display.toggle_fullscreen()
   screen.fill((255,255,255))
   mousepos = (0,0)
   
-  player = player.player((100,100),(32,64),(32,8),(0,56),3)
-  obj = objects.obj((256,128),(20,80),(20,20),(0,60))
+  player = player.player((100,100),(32,128),(32,8),(0,120),3)
+  obj = objects.obj((257,128),(20,80),(20,20),(0,60))
   renderlist = [player, obj]
   collidelist = [obj,]
 
@@ -31,6 +31,8 @@ if __name__== '__main__':
       i.render(screen, debug)
     if debug:
       screen.blit(font.render('FPS: '+str(int(clock.get_fps())),0,(0,0,0)),(4,4))
+      screen.blit(font.render('Mouse Position: '+str(mousepos),0,(0,0,0)),(4,20))
+    screen.fill((255,0,255),(mousepos[0]-2,mousepos[1]-2,4,4))
     pygame.display.flip()
 
     player.update(collidelist)
