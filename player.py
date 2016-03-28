@@ -1,5 +1,11 @@
 import pygame
 
+def box_overlap(i, j):
+  if i.pos[0]+i.col_offset[0]<j.pos[0]+j.col_offset[0]+j.col_box[0] and i.pos[0]+i.col_offset[0]+i.col_box[0]>j.pos[0]+j.col_offset[0]:
+    if i.pos[1]+i.col_offset[1]<j.pos[1]+j.col_offset[1]+j.col_box[1] and i.pos[1]+i.col_offset[1]+i.col_box[1]>j.pos[1]+j.col_offset[1]:
+      return True
+  return False
+
 class player():
   def __init__(self, pos, size, collisionbox, collision_offset, speed):
     self.pos = pos
@@ -40,31 +46,27 @@ class player():
       if self.up:
         self.pos = (self.pos[0], self.pos[1]-self.speed)
         for i in collidelist:
-          if i.pos[0]+i.col_offset[0]<self.pos[0]+self.col_offset[0]+self.col_box[0] and i.pos[0]+i.col_offset[0]+i.col_box[0]>self.pos[0]+self.col_offset[0]:
-            if i.pos[1]+i.col_offset[1]<self.pos[1]+self.col_offset[1]+self.col_box[1] and i.pos[1]+i.col_offset[1]+i.col_box[1]>self.pos[1]+self.col_offset[1]:
-	      self.pos = (self.pos[0], self.pos[1]+self.speed)
-              self.moving = False
+          if box_overlap(i, self):
+	    self.pos = (self.pos[0], self.pos[1]+self.speed)
+            self.moving = False
       elif self.down:
         self.pos = (self.pos[0], self.pos[1]+self.speed)        
         for i in collidelist:
-          if i.pos[0]+i.col_offset[0]<self.pos[0]+self.col_offset[0]+self.col_box[0] and i.pos[0]+i.col_offset[0]+i.col_box[0]>self.pos[0]+self.col_offset[0]:
-            if i.pos[1]+i.col_offset[1]<self.pos[1]+self.col_offset[1]+self.col_box[1] and i.pos[1]+i.col_offset[1]+i.col_box[1]>self.pos[1]+self.col_offset[1]:
-	      self.pos = (self.pos[0], self.pos[1]-self.speed)
-              self.moving = False
+          if box_overlap(i, self):
+	    self.pos = (self.pos[0], self.pos[1]-self.speed)
+            self.moving = False
       elif self.left:
         self.pos = (self.pos[0]-self.speed, self.pos[1])
         for i in collidelist:
-          if i.pos[0]+i.col_offset[0]<self.pos[0]+self.col_offset[0]+self.col_box[0] and i.pos[0]+i.col_offset[0]+i.col_box[0]>self.pos[0]+self.col_offset[0]:
-            if i.pos[1]+i.col_offset[1]<self.pos[1]+self.col_offset[1]+self.col_box[1] and i.pos[1]+i.col_offset[1]+i.col_box[1]>self.pos[1]+self.col_offset[1]:
-	      self.pos = (self.pos[0]+self.speed, self.pos[1])
-              self.moving = False
+          if box_overlap(i, self):
+	    self.pos = (self.pos[0]+self.speed, self.pos[1])
+            self.moving = False
       elif self.right:
         self.pos = (self.pos[0]+self.speed, self.pos[1])
         for i in collidelist:
-          if i.pos[0]+i.col_offset[0]<self.pos[0]+self.col_offset[0]+self.col_box[0] and i.pos[0]+i.col_offset[0]+i.col_box[0]>self.pos[0]+self.col_offset[0]:
-            if i.pos[1]+i.col_offset[1]<self.pos[1]+self.col_offset[1]+self.col_box[1] and i.pos[1]+i.col_offset[1]+i.col_box[1]>self.pos[1]+self.col_offset[1]:
-	      self.pos = (self.pos[0]-self.speed, self.pos[1])
-              self.moving = False
+          if box_overlap(i, self):
+	    self.pos = (self.pos[0]-self.speed, self.pos[1])
+            self.moving = False
 
 
   def render(self, screen, debug):

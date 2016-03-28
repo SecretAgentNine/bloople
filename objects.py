@@ -7,6 +7,10 @@ class obj():
     self.col_box = collisionbox
     self.col_offset = collision_offset
 
+  def update(self, collidelist):
+    if 0:
+      print "oops"
+
   def render(self, screen, debug):
     screen.fill((0,0,255),(self.pos[0],self.pos[1],self.size[0],self.size[1]))
     if debug:

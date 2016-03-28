@@ -4,9 +4,9 @@ import objects
 import tilemap
 
 class room():
-  def __init__(self, size, pos, player, objects):
-    self.size = size
-    self.surface = pygame.Surface(size)
+  def __init__(self, mapfile, pos, player, objects):
+    self.tilemap = tilemap.tilemap(mapfile)
+    self.surface = pygame.Surface(self.tilemap.surface.get_size())
     self.pos = pos
     self.player = player
     self.objects = objects
@@ -31,6 +31,7 @@ class room():
 
   def render(self, screen, debug):
     self.surface.fill((255,255,255))
+    self.tilemap.render(self.surface)
     for i in self.renderlist:
       i.render(self.surface, debug)
     screen.blit(self.surface, self.pos)
