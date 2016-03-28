@@ -10,7 +10,7 @@ if __name__== '__main__':
   #pygame.display.toggle_fullscreen()
   screen.fill((255,255,255))
   mousepos = (0,0)
-  room = room.room('resources/grassmap',(0,0), player.player((100,100),(32,128),(32,8),(0,120),3), [objects.obj((257,128),(20,80),(20,20),(0,60)),])
+  room = room.room('resources/grassmap',(0,0), player.player((100,100),(32,128),(32,8),(0,120),3), [objects.obj((257,128),(64,64),'resources/fence.png',(64,20),(0,44)),])
 
   font = pygame.font.Font('resources/PressStart2P-Regular.ttf',14)
 
