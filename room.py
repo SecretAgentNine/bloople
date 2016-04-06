@@ -4,8 +4,10 @@ import objects
 import tilemap
 
 class room():
-  def __init__(self, mapfile, pos, player, objects):
-    self.tilemap = tilemap.tilemap(mapfile)
+  def __init__(self, mapsize, mapfiles, pos, player, objects):
+    self.tilemap = tilemap.tilemap(mapsize)
+    for mapfile in mapfiles:
+      self.tilemap.addlayer(mapfile)
     self.surface = pygame.Surface(self.tilemap.surface.get_size())
     self.pos = pos
     self.player = player

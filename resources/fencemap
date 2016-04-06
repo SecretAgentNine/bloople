@@ -1,0 +1,14 @@
+tileset=resources/fence.png
+tilesize=(64,64)
+h:7
+v:5
+0:4
+***
+0hhhhhhhhhhhh0
+v000000000000v
+v000000000000v
+v000000000000v
+v000000000000v
+v000000000000v
+v000000000000v
+0hhhhhhhhhhhh0
