@@ -6,7 +6,7 @@ import menu
 
 if __name__== '__main__':
   pygame.init()
-  screen = pygame.display.set_mode((1024,512))
+  screen = pygame.display.set_mode((350,350))
   pygame.display.set_caption('Witch')
   #pygame.display.toggle_fullscreen()
   screen.fill((255,255,255))
@@ -40,7 +40,7 @@ if __name__== '__main__':
     screen.fill((255,0,255),(mousepos[0]-2,mousepos[1]-2,4,4))
     pygame.display.flip()
 
-    room.update()
+    room.update(screen)
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
