@@ -4,7 +4,7 @@ from ast import literal_eval
 
 class tilemap():
   def __init__(self, size):
-    self.surface = pygame.Surface(size)
+    self.surface = pygame.Surface(size,pygame.SRCALPHA)		#allows the surface to be blitted onto another without covering things up
 
   def addlayer(self, mapfile):
     m = open(mapfile, 'r')

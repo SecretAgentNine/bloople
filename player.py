@@ -15,31 +15,32 @@ class player():
     self.speed = speed
     self.right = True
     self.up = self.down = self.left = self.moving = False
+    self.key_stack = []
 
-  def move(self, key):
-    if key == pygame.K_UP:
+  def move(self, key, controls, flags=0):
+    if not flags:
+      self.key_stack.append(key)		#only add to the stack if the user actually pressed the key
+    if key == controls['up']:
       self.moving = self.up = True
       self.down = self.left = self.right = False
-    elif key == pygame.K_DOWN:
+    elif key == controls['down']:
       self.down = self.moving = True
       self.up = self.left = self.right = False
-    elif key == pygame.K_LEFT:
+    elif key == controls['left']:
       self.left = self.moving = True
       self.up = self.down = self.right = False
-    elif key == pygame.K_RIGHT:
+    elif key == controls['right']:
       self.right = self.moving = True
       self.up = self.left = self.down = False
 
-  def stop(self, key):
-    if key == pygame.K_UP and self.up:
-      self.moving = False
-    elif key == pygame.K_DOWN and self.down:
-      self.moving = False
-    elif key == pygame.K_LEFT and self.left:
-      self.moving = False
-    elif key == pygame.K_RIGHT and self.right:
-      self.moving = False
-    
+  def stop(self, key, controls):
+    for i in self.key_stack:
+      if i == key:
+        self.key_stack.remove(i)
+    if len(self.key_stack) != 0:
+      self.move(self.key_stack[len(self.key_stack)-1],controls,1)
+    else:
+      self.moving = False    
 
   def update(self, collidelist):
     if self.moving:
